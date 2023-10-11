@@ -1,17 +1,36 @@
 {% extends 'base.html' %}
 {% load blog_extras %}
+{% block content %}
+    <h2>Blog Posts</h2>
+    {% for post in posts %}
+    {% row "border-bottom" %}
+        <div class="col">
+            <h3>{{ post.title }}</h3>
+            {% include "blog/post-byline.html" %}
+            <p>{{ post.summary }}</p>
+            <p>
+                ({{ post.content|wordcount }} words)
+                <a href="{% url "blog-post-detail" post.slug %}">Read More</a
+            </p>
+        </div>
+    {% endrow %}
+    {% endfor %}
+{% endblock %}
+
+<!--{% load blog_extras %}
 
 {% block title %}
 This is index title
 {% endblock title %}
 
-{% block content %}
+block content 
     <h2>Blog Posts</h2>
     {% for post in posts %}
     <div class="row">
         <h3>{{ post.title }}</h3>
-       <!-- <small>By {{ post.author|author_details:request.user }} on {{ post.published_at|date:"M, d Y" }}</small>-->
-       <small>By
+
+       <small>By {{ post.author|author_details:request.user }} on {{ post.published_at|date:"M, d Y" }}</small>-->
+       <!--<small>By
     {% if post.author == request.user %}
         <strong>me</strong>
     {% else %}
@@ -35,5 +54,6 @@ This is index title
             <a href="#">Read More</a>
         </p>
     </div>
-    {% endfor %}
-{% endblock %}
+     {%endfor%} 
+ endblock -->
+
